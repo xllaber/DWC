@@ -1,0 +1,35 @@
+<html>
+
+<body>
+<div id="capaPrimos"></div>
+</body>
+
+<script>
+
+"use strict"
+
+let n=parseInt(prompt("Introduce número: "));
+let resultado="<table border=1>";
+
+for (let i=1; i<=n;i++){  
+  let numDivisores=0;
+  let textoNumero=" NO es Primo ";
+  for (let j=i; j>=1 ; j--)
+  {
+    if(i%j==0)
+	   numDivisores++;	
+  }
+  if (numDivisores<=2)
+       textoNumero=" SI es Primo ";
+  
+  resultado+="<tr><td>"+ i + textoNumero + "</td></tr>"  
+	
+}
+resultado+="</table>";
+
+document.getElementById("capaPrimos").innerHTML=resultado;	
+
+</script>
+
+
+</html>

@@ -1,0 +1,43 @@
+
+
+<html>
+
+<body>
+<div id="capaTablas"></div>
+</body>
+
+<script>
+"use strict"
+let n=parseInt(prompt("Introduce número 1: "));
+let m=parseInt(prompt("Introduce número 2: "));
+
+let resultado="<table border=1><tr><td>";
+let contador=0;
+
+for (let i=n; i<=m;i++){
+	let unaTabla="<b>Tabla del "+i+"</b>";
+	unaTabla+="<table>";
+	for (let x=1;x<=10;x++)
+		{
+		  unaTabla+="<tr><td>"+i+"</td><td> x </td><td>"+x+"<td>=</td><td>"+ i*x +"</td></tr>"
+		}
+	unaTabla+="</table>";
+	resultado+=unaTabla;
+	contador++;
+	if (contador%2==0)
+		{
+		   if(i!=m) resultado+="<tr><td>"
+		}
+		else
+		{
+		   resultado+="<td>"
+		}
+}
+resultado+="</table>";
+
+document.getElementById("capaTablas").innerHTML=resultado;	
+
+</script>
+
+
+</html>

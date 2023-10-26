@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+<body>
+
+<div id='numero'></div>
+<div id='tabla'></div>
+
+</body>
+
+
+<script>
+
+let n=parseInt(prompt("Dime numero"));
+
+if (isNaN(n)){
+	alert ("ERROR. No es un número");
+}
+else
+{
+document.getElementById("numero").innerHTML="<h1>Tabla del "+ n + "</h1>";
+
+mitabla="<table border=1>";
+for (i=1;i<=10;i++){
+	mitabla+="<tr><td>"+n+"</td><td> x </td><td>"+i+"</td><td>=</td><td>"+n*i+"</td>"
+}
+mitabla+="</table>";
+alert(mitabla);
+document.getElementById("tabla").innerHTML=mitabla;
+}
+</script>
+
+
+</html>

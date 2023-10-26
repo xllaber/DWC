@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de multiplicar</title>
+</head>
+<body>
+
+    <div>
+        <p id="text"></p>
+        <div style="display: flex; gap: 20px; align-items: start;">
+            <div id="container-text"></div>
+            <div id="container-table">
+                <button onclick="tableFunct()">Table</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+    let number = prompt("Number");
+    let header = `<h1>Multiplication table for ${number}</h1>`;
+    let table = "<table border = 1px>";
+
+    document.getElementById("text").innerHTML = header;
+
+    for (let i = 0; i <= 10; i++) {
+        document.getElementById("container-text").innerHTML += `<p>${number} x ${i} = ${number * i}</p>`;
+    }
+
+    function tableFunct() {
+        for (let i = 0; i <= 10; i++) {
+            table += `<tr><td>${number} x ${i} = </td><td>${number * i}</td></tr>`;
+        }
+        table += "</table>";
+        document.getElementById("container-table").innerHTML = table;
+    }
+
+</script>
+
+</html>

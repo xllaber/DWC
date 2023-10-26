@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container"></div>
+</body>
+
+<script>
+    let n1 = parseInt(prompt("Number 1:"));
+    let n2 = parseInt(prompt("Number 2:"));
+    let table = "<table border = 1><tr><td>";
+    let counter = 0;
+
+    for(let i = n1; i <= n2; i++) {
+        let tableInside = "<table>";
+        for(let j = 0; j <= 10; j++){
+            tableInside += `<tr><td>${i} x ${j} = ${i * j}</td></tr>`;
+        }
+        table += tableInside;
+        counter++;
+        tableInside += "</table>";
+        if(counter % 2 === 0) {
+            if (i != n1) {
+                table += "<tr><td>";
+            } else {
+
+            }
+            table += "</tr>";
+        }
+
+
+
+    }
+    table += "</table>";
+    document.getElementById("container").innerHTML = table;
+</script>
+
+</html>
