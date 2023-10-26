@@ -3,19 +3,19 @@
 let data = [
     {
         "trimestre": 1,
-        "meses": ['Enero', 'Febrero', 'Marzo'],
+        "months": ['Enero', 'Febrero', 'Marzo'],
     },
     {
         "trimestre": 2,
-        "meses": ['Abril', 'Mayo', 'Junio'],
+        "months": ['Abril', 'Mayo', 'Junio'],
     },
     {
         "trimestre": 3,
-        "meses": ['Julio', 'Agosto', 'Septiembre'],
+        "months": ['Julio', 'Agosto', 'Septiembre'],
     },
     {
         "trimestre": 4,
-        "meses": ['Octubre', 'Noviembre', 'Diciembre'],
+        "months": ['Octubre', 'Noviembre', 'Diciembre'],
     },
 ]
 
@@ -25,10 +25,14 @@ window.onload = function() {
     let monthSelect = document.getElementById("mesesSelect");
 
     mainSelect.addEventListener("change", () => {
-        console.log(mainSelect.value);
-        let trimestre = data.find(t => t.trimestre === mainSelect.value);
-        trimestre.meses.forEach(m => {
-            monthSelect.add(m, 1);
+        let trimestre = data.find(t => t.trimestre === mainSelect.value)
+        console.log(trimestre);
+        trimestre.months.forEach(m => {
+            let op = document.createElement("option");
+            op.textContent = m;
+            op.value = m;
+            monthSelect.appendChild(op)
         })
     })
+
 }
