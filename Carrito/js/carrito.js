@@ -5,11 +5,9 @@ class Carrito{
 	}
 						
 	anyadeArticulo(articulo){
-		// let existe = this.articulos.find(a => a.codigo === articulo.codigo);
 		if (this.articulos.indexOf(articulo) !== -1) {
-			articulo.unidades++;
+			articulo.unidades += 1;
 		} else {
-			console.log(this);
 			this.articulos.push(articulo);
 		}
 	}
@@ -24,6 +22,7 @@ class Carrito{
 		let articulo = this.articulos.find(a => a.codigo === codigo);
 		console.log(articulo);
 		(n === 1) ? articulo.unidades++ : (n === -1) ? articulo.unidades-- : undefined;
+		(articulo.unidades === 0) ? this.borraArticulo(articulo.codigo) : undefined;
 		this.verCarrito();
 	}	
 			
@@ -31,11 +30,9 @@ class Carrito{
 		let dialogo = document.getElementById("miDialogo");
 		dialogo.showModal();
 		let dialogContent = document.getElementById("dialogContent");
+		dialogContent.innerHTML = "";
 		document.getElementById("idPedido").innerHTML = `${this.id}`;
-		// let table = document.createElement("table");
-		// let tbody = document.createElement("t")
-		dialogContent.innerHTML = `<table class="table table-bordered table-striped">
-										<tbody>
+		let contenido = `<table class="table table-bordered table-striped">
 											<tr>
 												<td></td>
 												<td>NOMBRE</td>
@@ -47,30 +44,32 @@ class Carrito{
 											</tr>
 									`;
 		this.articulos.forEach(a => {
-			dialogContent.innerHTML += `<tr>
-											<td><img src="../assets/img/${a.codigo}.jpg" width="40px" height="40px" alt="${a.nombre}"></td>
-											<td>${a.nombre}</td>
-											<td>${a.descripcion}</td>
-											<td>${a.precio}</td>
-											<td>${a.unidades}</td>
-											<td>${a.unidades * a.precio}</td>
-											<td>
-												<button id="incremento" class="btn-success">+</button>
-												<button id="decremento" class="btn-warning">-</button>
-												<button id="borrar" class="btn-danger">Eliminar Producto</button>
-											</td>
-										</tr>`
-			// document.getElementById("incremento").addEventListener("click", () => this.modificaUnidades(a.codigo, 1));
-			// document.getElementById("decremento").addEventListener("click", () => this.modificaUnidades(a.codigo, -1));
-			// document.getElementById("borrar").addEventListener("click", () => this.borraArticulo(a.codigo));
+			contenido += `<tr>
+							<td><img src="../assets/img/${a.codigo}.jpg" width="40px" height="40px" alt="${a.nombre}"></td>
+							<td>${a.nombre}</td>
+							<td>${a.descripcion}</td>
+							<td>${a.precio}</td>
+							<td>${a.unidades}</td>
+							<td>${a.unidades * a.precio}</td>
+							<td>
+								<button id="${a.codigo}" class="btn-success rounded">+</button>
+								<button id="${a.codigo}" class="btn-warning rounded">-</button>
+								<button id="${a.codigo}" class="btn-danger rounded">Eliminar</button>
+							</td>
+						</tr>`
 		})
-		dialogContent.innerHTML += "</tbody></table>";
-		// let btnsIncremento = Array.from(document.getElementsByClassName("btn-success"));
-		// let btnsDecremento = Array.from(document.getElementsByClassName("btn-warning"));
-		// let btnsEliminar = Array.from(document.getElementsByClassName("btn-danger"));
-		//
-		// btnsIncremento.forEach(b => b.addEventListener("click", () => this.modificaUnidades(a.codigo, 1)));
-		// btnsDecremento.forEach(b => b.addEventListener("click", () => this.modificaUnidades(a.codigo, -1)));
-		// btnsEliminar.forEach(b => b.addEventListener("click", () => this.borraArticulo(a.codigo)));
+		contenido += "</tbody></table>";
+		dialogContent.innerHTML = contenido;
+		Array.from(dialogContent.getElementsByClassName("btn-success"))
+			.forEach(b => b.addEventListener("click", () => this.modificaUnidades(b.id, 1)));
+		Array.from(dialogContent.getElementsByClassName("btn-warning"))
+			.forEach(b => b.addEventListener("click", () => this.modificaUnidades(b.id, -1)));
+		Array.from(dialogContent.getElementsByClassName("btn-danger"))
+			.forEach(b => b.addEventListener("click", () => this.borraArticulo(b.id)));
+
+		let totalDiv = document.getElementById("total");
+		let total = this.articulos.reduce((total, a) => a.precio * a.unidades, 0);
+		console.log(total)
+		totalDiv.innerHTML = total;
 	}
 }

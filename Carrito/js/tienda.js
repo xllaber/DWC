@@ -1,5 +1,5 @@
 criterios=["Sin ordenar","Ascendente por precio", "Descendente por precio"]
-let carritoGeneral = {};
+let carrito = {};
 let carritos = [];
 
 function creaListaCriterios(){
@@ -41,8 +41,6 @@ function pintaArticulos(orden){
 									</div>
 								</div>
 								`
-		// debugger;
-		// document.getElementById(`${a.codigo}`).addEventListener("click", () => ponArticuloEnCarrito(a.codigo));
 	})
 	Array.from(document.getElementsByClassName("btn-success")).forEach( b => {
 		b.addEventListener("click", () => {
@@ -54,38 +52,44 @@ function pintaArticulos(orden){
 
 
 function ponArticuloEnCarrito(articulo){
-	// let articulo = listaArticulos.find(a => a.codigo === codigo);
-	console.log(articulo);
-	articulo.unidades = 1;
-	carritoGeneral.anyadeArticulo(articulo);
+	if (carrito.articulos.indexOf(articulo) < 0){
+		articulo.unidades = 1;
+		carrito.anyadeArticulo(articulo);
+	} else {
+		carrito.anyadeArticulo(articulo);
+	}
 }
 
 function verCarro(){
-	carritoGeneral.verCarrito();
-	console.log(carritoGeneral);
+	carrito.verCarrito();
 }
 
 function efectuaPedido(){
-
+	if (carrito.articulos.length === 0 ){
+		alert("El carrito esta vacio");
+	} else {
+		console.log(JSON.stringify(carrito));
+		carrito = new Carrito(carritos.length + 1);
+		carritos.push(carrito);
+	}
 }
 
 window.onload= () => {
 	creaListaCriterios();
 	pintaArticulos(criterios[0]);
 
-	let carrito = new Carrito(carritos.length + 1);
-	carritoGeneral = carrito;
+	carrito = new Carrito(carritos.length + 1);
 	carritos.push(carrito);
 
 	let carritoImg = document.getElementById("carritoImg");
 	carritoImg.addEventListener("click", () => verCarro());
 
-	// let btnsIncremento = Array.from(document.getElementsByClassName("btn-success"));
-	// let btnsDecremento = Array.from(document.getElementsByClassName("btn-warning"));
-	// let btnsEliminar = Array.from(document.getElementsByClassName("btn-danger"));
-	//
-	// btnsIncremento.forEach(b => b.addEventListener("click", () => this.modificaUnidades(a.codigo, 1)));
-	// btnsDecremento.forEach(b => b.addEventListener("click", () => this.modificaUnidades(a.codigo, -1)));
-	// btnsEliminar.forEach(b => b.addEventListener("click", () => this.borraArticulo(a.codigo)));
-
+	let dialogo = document.getElementById("miDialogo");
+	let efectuarPedido = document.getElementById("btnEfectuaPedido");
+	let cerrarCarrito = document.getElementById("btnCierraDialog");
+	efectuarPedido.addEventListener("click", () => {
+		this.efectuaPedido();
+		dialogo.close();
+	});
+	cerrarCarrito.addEventListener("click", () => dialogo.close());
 }
