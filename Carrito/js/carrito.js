@@ -71,7 +71,6 @@ class Carrito{
 		// let total = this.articulos.reduce((total, a) => a.precio * a.unidades, 0);
 		let total = 0;
 		this.articulos.forEach(a => total += (a.precio * a.unidades));
-		console.log(total)
 		totalDiv.innerHTML = total;
 	}
 }
