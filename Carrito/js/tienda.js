@@ -35,7 +35,7 @@ function pintaArticulos(orden){
 										<div class="card-body">
 											<h5 class="card-title">${a.nombre}</h5>
 											<p class="card-text">${a.descripcion}</p>
-											<b><p class="card-text text-center">${a.precio}</p></b>
+											<b><p class="card-text text-center">${a.precio}&euro;</p></b>
 										</div>
 										<button id="${a.codigo}" class="btn-success">COMPRAR</button>
 									</div>
@@ -61,14 +61,19 @@ function ponArticuloEnCarrito(articulo){
 }
 
 function verCarro(){
-	carrito.verCarrito();
+	if (carrito.articulos.length <= 0){
+		alert("El carrito esta vacio")
+	} else {
+		carrito.verCarrito();
+	}
 }
 
 function efectuaPedido(){
 	if (carrito.articulos.length === 0 ){
 		alert("El carrito esta vacio");
 	} else {
-		console.log(JSON.stringify(carrito));
+		let total =  document.getElementById("total").textContent;
+		console.log(JSON.stringify(carrito) + ", Precio total: " + total + "€");
 		carrito = new Carrito(carritos.length + 1);
 		carritos.push(carrito);
 	}

@@ -48,9 +48,9 @@ class Carrito{
 							<td><img src="../assets/img/${a.codigo}.jpg" width="40px" height="40px" alt="${a.nombre}"></td>
 							<td>${a.nombre}</td>
 							<td>${a.descripcion}</td>
-							<td>${a.precio}</td>
+							<td>${a.precio}&euro;</td>
 							<td>${a.unidades}</td>
-							<td>${a.unidades * a.precio}</td>
+							<td>${a.unidades * a.precio}&euro;</td>
 							<td>
 								<button id="${a.codigo}" class="btn-success rounded">+</button>
 								<button id="${a.codigo}" class="btn-warning rounded">-</button>
@@ -68,7 +68,9 @@ class Carrito{
 			.forEach(b => b.addEventListener("click", () => this.borraArticulo(b.id)));
 
 		let totalDiv = document.getElementById("total");
-		let total = this.articulos.reduce((total, a) => a.precio * a.unidades, 0);
+		// let total = this.articulos.reduce((total, a) => a.precio * a.unidades, 0);
+		let total = 0;
+		this.articulos.forEach(a => total += (a.precio * a.unidades));
 		console.log(total)
 		totalDiv.innerHTML = total;
 	}
