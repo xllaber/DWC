@@ -45,7 +45,7 @@ class Carrito{
 									`;
 		this.articulos.forEach(a => {
 			contenido += `<tr>
-							<td><img src="../assets/img/${a.codigo}.jpg" width="40px" height="40px" alt="${a.nombre}"></td>
+							<td><img src="assets/img/${a.codigo}.jpg" width="40px" height="40px" alt="${a.nombre}"></td>
 							<td>${a.nombre}</td>
 							<td>${a.descripcion}</td>
 							<td>${a.precio}&euro;</td>

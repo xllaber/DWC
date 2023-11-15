@@ -30,7 +30,7 @@ function pintaArticulos(orden){
 	listaOrdenada.forEach( a => {
 		contenedor.innerHTML += `<div class='col'>
 									<div class="card">
-										<img src="../assets/img/${a.codigo}.jpg" alt="${a.nombre}">
+										<img src="assets/img/${a.codigo}.jpg" alt="${a.nombre}">
 										<div class="card-body">
 											<h5 class="card-title">${a.nombre}</h5>
 											<p class="card-text">${a.descripcion}</p>
