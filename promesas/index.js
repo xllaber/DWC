@@ -36,6 +36,6 @@ let entidad = prompt("Dime la entidad", "movies");
 let id = parseInt(prompt("Dime id de la pelicula"));
 // get(entidad, id).then(response => response.forEach(r => console.log(r))).catch(error => console.log(error));
 
-let promise = new Promise((resolve, reject) => {
-    get(entidad, id).then(pelicula => get("actors", pelicula.actorId).then(a => console.log(a)).catch(() => console.log("Error")));
-})
+get(entidad, id)
+    .then(pelicula => get("actors", pelicula.actorId))
+    .then(a => console.log(a)).catch(() => console.log("Error"));
