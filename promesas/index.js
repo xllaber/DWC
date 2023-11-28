@@ -21,7 +21,7 @@ function get(entidad, id) {
                 resolve(req.response); // Resolve the promise with the response text
             }
             else {
-                reject(Error(req.statusText)); // HTTP Error reject with statusText
+                reject(Error(req.statusText + `en ${entidad}`)); // HTTP Error reject with statusText
             }
         };
         // Handle network errors
@@ -38,4 +38,4 @@ let id = parseInt(prompt("Dime id de la pelicula"));
 
 get(entidad, id)
     .then(pelicula => get("actors", pelicula.actorId))
-    .then(a => console.log(a)).catch(() => console.log("Error"));
+    .then(a => console.log(a)).catch(() => console.log("Error: no encontrado en " + entidad));
